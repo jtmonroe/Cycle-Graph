@@ -116,8 +116,4 @@ class cycle_graph():
 		p_1.prev = p_2
 		p_2.next = p_1
 		self.__pos_assign(0)
-		self.__spin_assignment()
-
-
-if __name__ == '__main__':
-	
+		self.__spin_assignment()	
