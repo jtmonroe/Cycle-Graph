@@ -8,11 +8,12 @@ class cycle_graph():
 			self.spin = 0
 			self.pos = 0
 
-	def __init__(self):
+	def __init__(self, list):
 		self.__base_node = None
 		self.__standing = None
 		self.__length = 0
 		self.__steps = 0
+		self.__input(list)
 
 	def __set_base(self):
 		current = self.__base_node
@@ -50,7 +51,7 @@ class cycle_graph():
 			new_node.next = self.__base_node
 		self.__length = self.__length + 1
 
-	def input(self, list, n = 0):
+	def __input(self, list, n = 0):
 		for i in list:
 			self.__insert(i)
 		self.__set_base()
@@ -105,8 +106,17 @@ class cycle_graph():
 	def next_node(self):
 		self.__standing = self.__standing.next
 
-	def print_current(self):
-		print(self.__standing.val)
+	def prev_node(self):
+		self.__standing = self.__standing.next
+
+	def value(self):
+		return self.__standing.val
+
+	def spin(self):
+		return self.__standing.spin
+
+	def position(self):
+		return self.__standing.pos
 
 	def spin(self, p_1, p_2):
 		p_1.next = p_2.next
