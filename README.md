@@ -14,7 +14,7 @@ File created to assist in Research for the William and Mary EXTREEMS-QED 2017 pr
                 Initialized to allow users to enter the graph from a consistent point. Currently set to be the minimum of objects within the list.
                 
             * Standing
-                Allows for users to make changes to the list depending upon which node they are standing upon. Two nodes cannot be stood upon at once
+                Allows for users to make changes to the list depending upon which node they are standing upon. Two nodes cannot be stood upon at once.
             
             * Length and steps
                 For the sake of the user's interest.
@@ -33,6 +33,12 @@ File created to assist in Research for the William and Mary EXTREEMS-QED 2017 pr
             * Pos
                 The postion of the node with relation to the lowest value.
                 
+            * N
+                the length of the list for purposes of comparison.
+                
+    * ### __cg_Node __gt__():
+        * tests to see if the nodes are comparable, ie; spin(a) - spin(b) > pos(b) - pos(a) (+ n if a > b).
+                
 * ## Filling the Graph
     
     * ### Input:
@@ -41,8 +47,6 @@ File created to assist in Research for the William and Mary EXTREEMS-QED 2017 pr
         * __insert()
         pushes the new value onto the graph, while retaining the cyclic form. Increments length each time.
         
-        * __set_base()
-        Distinguishes the base node of the graph by finding the minimum value.
         
         * __pos_assign()
         assigns positions based on the base node position, which starts at 1.
@@ -58,21 +62,43 @@ File created to assist in Research for the William and Mary EXTREEMS-QED 2017 pr
         * returns a line of pointers which direct from node to node, ending and starting with the base node.
         
 * ## Graph Properties
-    * ### disp()
-        * If the sums of the spins is equal to zero, returns an output similar to that of str. Otherwise, returns the sum of the spins
+    * ### dist()
+        * returns a list containing all the spins of the nodes.
         
     * ### total_spin()
-        * Returns the sum of the absolute value of the spins
+        * Returns the sum of the absolute value of the spins.
+        
+    * ### terms()
+        * Returns a list with all terms in original order.
+        
+    * ### not_ordered()
+        * Tests if cycle is unordered. Returns false if not, true if it is unordered.
+        
+    * ### value(), spin(), and position()
+        * Returns the value, spin, and position of the standing node.
+        
+    * ### next_value() and next_spin() 
+        * Returns the value and spin of the node after the standing node.
+        
+    * ### steps()
+        * Returns the total number of steps logged.
+        
+    * ### compare()
+        * Compares the standing node and the next to see if they are comparable.
+        
         
 * ## Sorting Functions
+    * ### optimize()
+        * Minimizes the absolute value of the sums of the spins by reducing the value of the maximum and minimum spins if their sum is greater than the length.
+        
     * ### step_counter()
         * counts the total number of steps and attaches it as a property to the graph object.
         
-    * ### next_node()
+    * ### next_node() and prev_node()
         * Allows the user to move to the next node without using a current walk. Utilizes the standing node to move through the graph.
         
-    * ### print_current()
-        * Prints the Value of the standing node.
+    * ### reset()
+        * Sets the standing node back to the base node.
         
     * ### swap()
         * Takes in two consectutive nodes and swaps them.
