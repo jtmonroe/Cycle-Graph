@@ -13,8 +13,8 @@ File created to assist in Research for the William and Mary EXTREEMS-QED 2017 pr
             * Base_Node
                 Initialized to allow users to enter the graph from a consistent point. Currently set to be the minimum of objects within the list.
                 
-            * Standing
-                Allows for users to make changes to the list depending upon which node they are standing upon. Two nodes cannot be stood upon at once.
+            * Standing and compare
+                Allows for users to make changes to the list depending upon which node they are standing upon. Two nodes cannot be stood upon at once. Compare node for assorted uses.
             
             * Length and steps
                 For the sake of the user's interest.
@@ -62,9 +62,12 @@ File created to assist in Research for the William and Mary EXTREEMS-QED 2017 pr
         * returns a line of pointers which direct from node to node, ending and starting with the base node.
         
 * ## Graph Properties
-    * ### dist()
-        * returns a list containing all the spins of the nodes.
+    * ### dist_print()
+        * returns a string of the spins with the same formating as the str function.
         
+    * ### dist_list()
+        * returns a list containing all the spins of the nodes.
+
     * ### total_spin()
         * Returns the sum of the absolute value of the spins.
         
@@ -73,18 +76,19 @@ File created to assist in Research for the William and Mary EXTREEMS-QED 2017 pr
         
     * ### not_ordered()
         * Tests if cycle is unordered. Returns false if not, true if it is unordered.
+    
+    * ### __getitem__()
+        * Returns the value at the given position key.
         
     * ### value(), spin(), and position()
-        * Returns the value, spin, and position of the standing node.
-        
-    * ### next_value() and next_spin() 
-        * Returns the value and spin of the node after the standing node.
+        * Returns the value, spin, and position of the standing node. All have the option of entering an arguement of 'comp' to check the entries of the comparison node. Value and spin have the option of 'next' to check the next node.
+
         
     * ### steps()
         * Returns the total number of steps logged.
         
     * ### compare()
-        * Compares the standing node and the next to see if they are comparable.
+        * Compares the standing node and the next to see if they are comparable. User can also check the standing node and then compare node if the arguement 'comp' is entered.
         
         
 * ## Sorting Functions
@@ -95,10 +99,13 @@ File created to assist in Research for the William and Mary EXTREEMS-QED 2017 pr
         * counts the total number of steps and attaches it as a property to the graph object.
         
     * ### next_node() and prev_node()
-        * Allows the user to move to the next node without using a current walk. Utilizes the standing node to move through the graph.
+        * Allows the user to move to the next node without using a current walk. Utilizes the standing node to move through the graph. The compare node can also be moved forward using the argument 'comp'.
         
     * ### reset()
-        * Sets the standing node back to the base node.
+        * Sets the standing node back to the base node. Resets the compare node to the base node if the argument 'comp' is entered.
+        
+    * ### send()
+        * Sends the standing node to the according position key.
         
     * ### swap()
         * Takes in two consectutive nodes and swaps them.
