@@ -1,4 +1,6 @@
 class cycle_graph():
+	"""A package built to support research into graphs for the 
+	William and Mary EXTREEMS-QED program."""
 
 	class __cg_Node():
 		def __init__(self, val):
@@ -25,7 +27,6 @@ class cycle_graph():
 		self.__standing = None
 		self.__compare = None
 		self.__length = 0
-		self.__steps = 0
 		self.__input(list_, n)
 
 	###Initialization Functions
@@ -87,6 +88,7 @@ class cycle_graph():
 		return string
 
 	def dist_print(self):
+		""" Returns a string of the spins copying the format of the str function """
 		if self.__length == 0:
 			return ""
 		current = self.__base_node
@@ -98,6 +100,7 @@ class cycle_graph():
 		return string
 
 	def dist_list(self):
+		""" Returns a list of the spins """
 		if self.__length == 0:
 			return ""
 		current = self.__base_node
@@ -109,6 +112,7 @@ class cycle_graph():
 		return list_
 
 	def total_spin(self):
+		""" Finds the sum of the absolute values of the spins """
 		current = self.__base_node
 		total = 0
 		for _ in range(self.__length):
@@ -117,6 +121,7 @@ class cycle_graph():
 		return total
 
 	def terms(self):
+		""" Returns the elements in the cycle in list format """
 		current = self.__base_node
 		out = []
 		for _ in range(self.__length):
@@ -125,6 +130,7 @@ class cycle_graph():
 		return out
 
 	def not_ordered(self):
+		""" Tests the ordering of the cycle and returns false if it is, and true if it is not """
 		current = self.__base_node
 		for _ in range(self.__length):
 			if current.pos != current.val:
@@ -141,6 +147,9 @@ class cycle_graph():
 		return current.val
 
 	def value(self, node = ''):
+		""" Returns the value of the standing node by default. 
+		With the argument 'comp', it returns the value of the comparison node.
+		With the argument 'next', it returns the value of the next node. """
 		if node == 'comp':
 			return self.__compare.val
 		elif node == 'next':
@@ -148,6 +157,9 @@ class cycle_graph():
 		return self.__standing.val
 
 	def spin(self, node = ''):
+		""" Returns the spin of the standing node by default. 
+		With the argument 'comp', it returns the spin of the comparison node.
+		With the argument 'next', it returns the spin of the next node. """
 		if node == 'comp':
 			return self.__compare.spin
 		elif node == 'next':
@@ -155,12 +167,11 @@ class cycle_graph():
 		return self.__standing.spin
 
 	def position(self, node = ''):
+		""" Returns the postion of the standing node by default. 
+		With the argument 'comp', it returns the postion of the comparison node.comparison."""
 		if node == 'comp':
 			return self.__compare.pos
 		return self.__standing.pos
-
-	def steps(self):
-		return self.__steps
 
 	def compare(self, node = ''):
 		if node == 'comp':
@@ -169,6 +180,7 @@ class cycle_graph():
 
 	###Sorting Functions
 	def optimize(self):
+		""" Optimizes the spins by minimizing their values """
 		temp = self.dist_list()
 		if sum(temp) == 0:
 			while max(temp) - min(temp) > self.__length:
@@ -182,10 +194,9 @@ class cycle_graph():
 				current.spin = i
 				current = current.next
 
-	def step_counter(self):
-		self.__steps = self.__steps + 1
-
 	def next_node(self, node = ''):
+		""" Sends the standing node to the next node by default.
+		With the argument 'comp', sends the compare node to its next node."""
 		if node == 'comp':
 			self.__compare = self.__compare.next
 			return
@@ -195,22 +206,25 @@ class cycle_graph():
 		self.__standing = self.__standing.next
 
 	def reset(self, node = ''):
+		""" Sends the standing node to the base node by default.
+		With the argument 'comp', sends the compare node to the base node."""
 		if node == 'comp':
 			self.__compare = self.__base_node
 			return
 		self.__standing = self.__base_node
 
 	def send(self, key):
+		""" Sends the standing node to the position key"""
 		if key > self.__length and key < 1:
 			raise IndexError
 		while self.__standing.pos != key:
 			self.__standing = self.__standing.next
 
 	def swap(self):
+		"""Swaps the standing node with the its next neighbor"""
 		if self.compare():
 			p_1 = self.__standing
 			p_2 = self.__standing.next
-			print(p_1.val, " ", p_2.val)
 			p_1.next = p_2.next
 			p_2.prev = p_1.prev
 			p_1.prev.next = p_2
